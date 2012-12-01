@@ -130,8 +130,6 @@ void Catalog::removeElem(QString name)
 
 void Catalog::addElem(Element elem)
 {
-    bool err;
-
     int modelrow = model->rowCount();
     model->insertRows(modelrow, 1);
     model->setData(model->index(modelrow, 1), elem.getName());
