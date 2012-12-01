@@ -9,6 +9,6 @@ TARGET = nameplates
 
 
 # Input
-HEADERS += catalog.h element.h mainwindow.h
-FORMS += mainwindow.ui
-SOURCES += catalog.cpp main.cpp mainwindow.cpp
+HEADERS += catalog.h element.h mainwindow.h form.h
+FORMS += mainwindow.ui form.ui
+SOURCES += catalog.cpp main.cpp mainwindow.cpp form.cpp

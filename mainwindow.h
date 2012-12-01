@@ -26,9 +26,12 @@ private:
 
   Catalog *catalog;
 
+
 public slots:
   void generatePdf();
   void selectToRemove();
+  void addElement();
+  void refresh();
 
 signals:
   void selectedToRemove(QString);

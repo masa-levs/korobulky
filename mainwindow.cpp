@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "form.h"
 
 #include <QMessageBox>
 
@@ -29,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(ui->bPrint, SIGNAL(clicked()), this, SLOT(generatePdf()));
     QObject::connect(ui->bRemove, SIGNAL(clicked()), this, SLOT(selectToRemove()));
     QObject::connect(this, SIGNAL(selectedToRemove(QString)), catalog, SLOT(removeElem(QString)));
-
+    QObject::connect(ui->bAdd, SIGNAL(clicked()), this, SLOT(addElement()));
 
 }
 
@@ -45,8 +46,6 @@ void MainWindow::generatePdf()
     catalog->generatePdfList();
     catalog->generatePdfNameplates();
     QMessageBox::information(this, "Generation PDF", QString::fromUtf8("Файлы list.pdf и nameplates.pdf успешно созданы."));
-
-
 }
 
 void MainWindow::selectToRemove()
@@ -57,5 +56,25 @@ void MainWindow::selectToRemove()
     name = catalog->getModel()->index(ui->results->currentIndex().row(), 1).data().toString();
     emit selectedToRemove(name);
   }
+}
+
+void  MainWindow::addElement()
+{
+    Form *addForm;
+    if (ui->filter->currentIndex() == 1)
+        addForm = new Form(ui->filter_text->text(),0);
+    else
+        addForm = new Form("",0);
+    addForm->show();
+    this->setEnabled(false);
+
+    QObject::connect(addForm, SIGNAL(addedElem(Element)), catalog, SLOT(addElem(Element)));
+    QObject::connect(addForm, SIGNAL(closed()), this, SLOT(refresh()));
+}
+
+void MainWindow::refresh()
+{
+  this->setEnabled(true);
+  catalog->getModel()->select();
 }
 

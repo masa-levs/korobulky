@@ -10,6 +10,7 @@
 #ifndef __CATALOG_H
 #define __CATALOG_H
 
+#include "element.h"
 
 #include <QString>
 #include <QStringList>
@@ -32,6 +33,7 @@ public:
 
 public slots:
   void removeElem(QString name);
+  void addElem(Element);
 
 public:
   void generatePdfList();

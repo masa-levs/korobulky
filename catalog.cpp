@@ -17,6 +17,7 @@
 #include <QTextCursor>
 #include <QTextTable>
 
+#include <cstdio>
 
 const QString Catalog::databaseFilename = "catalog.db";
 const QString Catalog::tableName = "details";
@@ -125,5 +126,27 @@ void Catalog::removeElem(QString name)
     }
     i++;
   }
+}
+
+void Catalog::addElem(Element elem)
+{
+    bool err;
+
+    int modelrow = model->rowCount();
+    model->insertRows(modelrow, 1);
+    model->setData(model->index(modelrow, 1), elem.getName());
+    model->setData(model->index(modelrow, 2), elem.getCategory());
+    model->setData(model->index(modelrow, 3), elem.getDescription());
+    model->setData(model->index(modelrow, 4), elem.getBox());
+    model->setData(model->index(modelrow, 5), elem.getRow());
+    model->setData(model->index(modelrow, 6), elem.getColumn());
+    model->setData(model->index(modelrow, 7), elem.getCount());
+    model->setData(model->index(modelrow, 8), elem.getLink());
+    model->setData(model->index(modelrow, 9), elem.getPrice());
+
+    if (!model->submitAll()) {
+        printf("$$$\n");
+    }
+
 }
 
