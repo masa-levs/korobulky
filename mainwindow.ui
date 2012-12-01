@@ -155,7 +155,7 @@
        <item>
         <widget class="QPushButton" name="bPrint">
          <property name="text">
-          <string>Шильдики</string>
+          <string>Создать PDF</string>
          </property>
         </widget>
        </item>

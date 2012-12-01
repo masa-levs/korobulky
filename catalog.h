@@ -16,8 +16,10 @@
 #include <QStringList>
 #include <QSqlTableModel>
 
-class Catalog
+class Catalog : public QObject
 {
+  Q_OBJECT
+
   QStringList header;
   QSqlTableModel *model;
 
@@ -29,13 +31,16 @@ public:
     return model;
   }
 
-
+public slots:
   void generatePdfList();
   void generatePdfNameplates();
 
+public:
   static const QString databaseFilename;
   static const QString tableName;
   static const int     tableColumns = 10;
+  static const QString pdfListFilename;
+  static const QString pdfNameplatesFilename;
 };
 
 

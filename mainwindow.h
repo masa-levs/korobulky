@@ -26,6 +26,9 @@ private:
 
   Catalog *catalog;
 
+public slots:
+  void generatePdf();
+
 };
 
 #endif // MAINWINDOW_H

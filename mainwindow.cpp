@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->bEdit->setEnabled(false);
 
     QObject::connect(ui->bExit, SIGNAL(clicked()), this, SLOT(close()));
+    QObject::connect(ui->bPrint, SIGNAL(clicked()), this, SLOT(generatePdf()));
 
 }
 
@@ -32,5 +34,15 @@ MainWindow::~MainWindow()
 {
   delete catalog;
   delete ui;
+}
+
+
+void MainWindow::generatePdf()
+{
+    catalog->generatePdfList();
+    catalog->generatePdfNameplates();
+    QMessageBox::information(this, "Generation PDF", QString::fromUtf8("Файлы list.pdf и nameplates.pdf успешно созданы."));
+
+
 }
 
