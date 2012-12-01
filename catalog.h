@@ -10,7 +10,6 @@
 #ifndef __CATALOG_H
 #define __CATALOG_H
 
-#include "element.h"
 
 #include <QString>
 #include <QStringList>
@@ -32,10 +31,12 @@ public:
   }
 
 public slots:
+  void removeElem(QString name);
+
+public:
   void generatePdfList();
   void generatePdfNameplates();
 
-public:
   static const QString databaseFilename;
   static const QString tableName;
   static const int     tableColumns = 10;

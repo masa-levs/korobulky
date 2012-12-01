@@ -28,6 +28,10 @@ private:
 
 public slots:
   void generatePdf();
+  void selectToRemove();
+
+signals:
+  void selectedToRemove(QString);
 
 };
 

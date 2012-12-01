@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     QObject::connect(ui->bExit, SIGNAL(clicked()), this, SLOT(close()));
     QObject::connect(ui->bPrint, SIGNAL(clicked()), this, SLOT(generatePdf()));
+    QObject::connect(ui->bRemove, SIGNAL(clicked()), this, SLOT(selectToRemove()));
+    QObject::connect(this, SIGNAL(selectedToRemove(QString)), catalog, SLOT(removeElem(QString)));
+
 
 }
 
@@ -44,5 +47,15 @@ void MainWindow::generatePdf()
     QMessageBox::information(this, "Generation PDF", QString::fromUtf8("Файлы list.pdf и nameplates.pdf успешно созданы."));
 
 
+}
+
+void MainWindow::selectToRemove()
+{
+  QString name;
+
+  if (ui->results->currentIndex().row() != -1) {
+    name = catalog->getModel()->index(ui->results->currentIndex().row(), 1).data().toString();
+    emit selectedToRemove(name);
+  }
 }
 

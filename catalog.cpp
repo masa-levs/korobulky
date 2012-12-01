@@ -114,4 +114,16 @@ void Catalog::generatePdfNameplates()
 }
 
 
+void Catalog::removeElem(QString name)
+{
+  int i = 0;
+  while (i<model->rowCount()) {
+    if (model->index(i, 1).data().toString() == name) {
+      model->removeRow(i);
+      model->submitAll();
+      return;
+    }
+    i++;
+  }
+}
 
